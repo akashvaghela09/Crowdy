@@ -17,6 +17,7 @@ function App() {
     applicationList
 } = useSelector((state) => state.app)
   useEffect(() => {
+    window.ethereum.request({method:'eth_requestAccounts'})
         
     // method 1 => with JsonRpcProvider/Infura 
     // const ethersProvider = new ethers.providers.JsonRpcProvider(process.env.REACT_APP_RINKEBY_URL);
