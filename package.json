@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.5.0",
+    "axios": "^0.26.0",
     "dotenv": "^16.0.0"
   }
 }

@@ -1,0 +1,59 @@
+.wrapper {
+    background: #1a1a1a;
+    min-height: calc(100vh - 60px);
+    color: rgb(0, 0, 0);
+    overflow: auto;
+}
+
+.pageDiv {
+    display: flex;
+}
+
+.text {
+    font-size: 40px;
+    color: rgb(192, 192, 192);
+    margin: 20px;
+}
+
+.link {
+    width: 40vw;
+    border-radius: 6px;
+    all: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.link:hover {
+    color: #272727;
+}
+
+.icon {
+    font-size:140px;
+    margin: 10px;
+    color: #f1c40f;
+}
+
+.text2 {
+    font-size:35px;
+    cursor: pointer;
+}
+
+.card {
+    border: 2px solid rgb(20, 20, 20);
+    background: rgb(129, 129, 129);
+    padding: 20px;
+    font-size: 30px;
+    color: rgb(179, 179, 179);
+    margin: 20px;
+    border-radius: 6px;
+}
+
+@media screen and (max-width: 600px) {
+    
+    .text {
+        font-size: 30px;
+    }
+    .pageDiv {
+        flex-direction: column;
+    }
+}
