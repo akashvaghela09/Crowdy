@@ -1,0 +1,49 @@
+.wrapper {
+    background: #1a1a1a;
+    min-height: calc(100vh - 60px);
+    color: white;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+
+.formDiv {
+    width: 75%;
+    background: #2c2c2c;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.formRow {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+}
+
+.formLabel {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.formInput {
+    font-size:20px;
+    padding: 5px;
+    width: 95%;
+    margin: auto;
+}
+
+.submitBtn {
+    border: 2px solid black;
+    background: black;
+    padding: 10px 50px;
+    margin: 10px;
+    margin-bottom: 30px;
+    color: rgb(209, 209, 209);
+    font-size: 20px;
+}

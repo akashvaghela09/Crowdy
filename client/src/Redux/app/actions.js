@@ -1,27 +1,30 @@
 import { 
-    SET_TOTAL_FUND_RAISED,
-    SET_TOTAL_APPLICATION,
-    SET_APPLICATION_LIST,
-    SET_CONTRACT_INSTANCE
+    SET_LOADING,
+    SET_ERROR, 
+    SET_ALERT, 
+    SET_CONTRACT_INSTANCE,
+    SET_WALLET,
+    SET_WALLET_MODAL,
+    SET_IS_AUTH
 } from './actionTypes';
 
-const setTotalFundRaised = (payload) => {
+const setLoading = (payload) => {
     return {
-        type: SET_TOTAL_FUND_RAISED,
+        type: SET_LOADING,
         payload
     }
 }
 
-const setTotalApplication = (payload) => {
+const setError = (payload) => {
     return {
-        type: SET_TOTAL_APPLICATION,
+        type: SET_ERROR,
         payload
     }
 }
 
-const setApplicationList = (payload) => {
+const setAlert = (payload) => {
     return {
-        type: SET_APPLICATION_LIST,
+        type: SET_ALERT,
         payload
     }
 }
@@ -33,10 +36,33 @@ const setContractInstance = (payload) => {
     }
 }
 
+const setWallet = (payload) => {
+    return {
+        type: SET_WALLET,
+        payload
+    }
+}
+
+const setWalletModal = (payload) => {
+    return {
+        type: SET_WALLET_MODAL,
+        payload
+    }
+}
+
+const setIsAuth = (payload) => {
+    return {
+        type: SET_IS_AUTH,
+        payload
+    }
+}
 
 export { 
-    setTotalFundRaised,
-    setTotalApplication,
-    setApplicationList,
-    setContractInstance
+    setLoading,
+    setError,
+    setAlert,
+    setContractInstance,
+    setWallet,
+    setWalletModal,
+    setIsAuth
 }
