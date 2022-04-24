@@ -2,20 +2,18 @@ import { ethers } from "ethers";
 
 const metaMaskChecker = async () => {
     if (window.ethereum !== undefined && await metamask.isUnlocked() === false) {
-        let alertObj = { status: true, msg: "MetaMask is Locked!!" }
         return {
-            available: false,
-            obj: alertObj
+            status: false,
+            msg: "MetaMask is Locked !!"
         }
     } else if (window.ethereum === undefined) {
-        let alertObj = { status: true, msg: "Metamask Not Found!!" }
         return {
-            available: false,
-            obj: alertObj
+            status: false,
+            msg: "MetaMask Not Found !!"
         }
     } 
 
-    return {available: true}
+    return {status: true}
 }
 
 const metamask = {

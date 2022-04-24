@@ -10,10 +10,11 @@ import { IoWalletOutline } from 'react-icons/io5';
 import { GoLinkExternal } from 'react-icons/go';
 import { SiHiveBlockchain } from 'react-icons/si';
 import { FiLogOut } from 'react-icons/fi';
-import { setAlert, setContractInstance, setIsAuth, setLoading, setWallet, setWalletModal } from "../Redux/app/actions"
+import { setContractInstance, setIsAuth, setLoading, setWallet, setWalletModal } from "../Redux/app/actions"
 import { ethers } from "ethers";
 import myContractData from "../artifacts/contracts/CrowdFunding.sol/CrowdFunding.json";
 import { metamask, metaMaskChecker } from '../Utils/metamaskChecker';
+import { toast } from 'react-toastify';
 
 const Wallet = () => {
     const dispatch = useDispatch();
@@ -48,11 +49,11 @@ const Wallet = () => {
                 setUserWalletLoading(false);
                 let response = await metaMaskChecker();
 
-                if(response.available === true){
+                if(response.status === true){
                     connectWallet(para)
                 } else {
                     dispatch(setWalletModal(false))
-                    dispatch(setAlert(response.obj))
+                    toast.error(response.msg)
                 }
             }, 1500);
         } else if (para === "guest") {

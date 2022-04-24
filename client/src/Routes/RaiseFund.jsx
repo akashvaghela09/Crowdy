@@ -72,9 +72,9 @@ const RaiseFund = () => {
         dispatch(setLoading(true))
         let response = await metaMaskChecker();
 
-        if(response.available === false && isAuth === false){
+        if(response.status === false && isAuth === false){
             dispatch(setLoading(false))
-            toast.error(response.obj.msg)
+            toast.error(response.msg)
             return
         }
 
