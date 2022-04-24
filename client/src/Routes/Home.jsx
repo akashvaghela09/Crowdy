@@ -95,9 +95,9 @@ const Home = () => {
         initData()
     }
 
-    useEffect(() => {
-        initData()
-    }, [contract]);
+    // useEffect(() => {
+    //     initData()
+    // }, [contract]);
 
     return (
         <div className='h-full flex justify-center items-center flex-col'>

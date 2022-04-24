@@ -16,10 +16,10 @@ const RaiseFund = () => {
     } = useSelector(state => state.app)
 
     // required data for contract creation
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [amount, setAmount] = useState("")
-    const [address, setAddress] = useState("")
+    const [title, setTitle] = useState("Avengers: Endgame")
+    const [description, setDescription] = useState("Avengers: Endgame is a 2019 American superhero film based on the Marvel Comics superhero team the Avengers. Produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures, it is the direct sequel to Avengers: Infinity War and the 22nd film in the Marvel Cinematic Universe.")
+    const [amount, setAmount] = useState("20000")
+    const [address, setAddress] = useState("0x51E821EE92486EfbaE1A63b2da3f75546084c6B8")
 
     // for upload image preview
     const [image, setImage] = useState("")
@@ -105,12 +105,12 @@ const RaiseFund = () => {
         await form.wait()
         console.log("Submitted!!")
 
-        setTitle("")
-        setDescription("")
-        setAddress("")
-        setAmount("")
-        setFile("")
-        setImage("")
+        // setTitle("")
+        // setDescription("")
+        // setAddress("")
+        // setAmount("")
+        // setFile("")
+        // setImage("")
 
         dispatch(setLoading(false))
     }
