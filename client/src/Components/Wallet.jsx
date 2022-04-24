@@ -135,8 +135,8 @@ const Wallet = () => {
 
     return (
         <>
-            <div className='px-4' >
-                <MdOutlineAccountBalanceWallet className='fill-slate-300 text-3xl cursor-pointer hover:fill-slate-900 transition ease-in' onClick={() => checkAuthStatus()} />
+            <div className='px-2 py-1 mx-2 hover:bg-blue-500 rounded-md ' >
+                <MdOutlineAccountBalanceWallet className='fill-slate-300 text-4xl cursor-pointer transition ease-in' onClick={() => checkAuthStatus()} />
                 {
                     isAuth === true ?
                         <div className='border-2 border-slate-200 rounded-full w-3 h-3 bg-green-500 absolute bottom-3 right-3 md:right-7' />
