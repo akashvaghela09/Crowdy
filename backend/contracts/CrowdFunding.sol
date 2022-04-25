@@ -16,7 +16,7 @@ contract CrowdFunding {
         bool isValid;
     }
 
-    Funding[] internal fundingArr;
+    Funding[] public fundingArr;
     uint256 internal nextId = 0;
     uint256 internal totalFundingRaised = 0;
     address internal owner = msg.sender;
@@ -35,6 +35,11 @@ contract CrowdFunding {
     // get all data
     function getFundingData () public view returns (Funding[] memory) {
         return fundingArr;
+    }
+
+    // get all data length
+    function getTotalFundingData () public view returns (uint256) {
+        return fundingArr.length;
     }
 
     // show how much amount collectively raised through crowd funding

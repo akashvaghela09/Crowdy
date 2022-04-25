@@ -178,8 +178,8 @@ const Wallet = () => {
             }
 
             {
-                profileModal === true &&                                                                                // -4px 5px 12px 0px rgba(5,8,15,0.77)
-                <div className='absolute top-[65px] right-2  w-fit h-fit flex flex-col items-center rounded bg-slate-300 py-2 drop-shadow-[-4px_5px_12px_rgba(5,8,15,0.77)]'>
+                profileModal === true &&                                                                                // -4px 5px 12px 0px rgba(5,8,15,0.77) [-4px_5px_12px_rgba(5,8,15,0.77)]
+                <div className='absolute top-[65px] right-2  w-fit h-fit flex flex-col items-center rounded bg-slate-300 py-2 drop-shadow-[-2px_3px_5px_rgba(5,8,15,0.77)]'>
                     <FaUserCircle className='text-6xl text-slate-800 my-4' />
                     <div className='flex items-center p-2 px-4'>
                         <p className='text-slate-800 m-1'>ETH : {concatString(wallet.accounts[0])}</p>
