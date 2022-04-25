@@ -1,45 +1,64 @@
-import { 
-    SET_TOTAL_APPLICATION,
-    SET_TOTAL_FUND_RAISED,
-    SET_APPLICATION_LIST,
-    SET_CONTRACT_INSTANCE
+import {
+    SET_LOADING,
+    SET_ERROR,
+    SET_ALERT,
+    SET_CONTRACT_INSTANCE,
+    SET_WALLET,
+    SET_WALLET_MODAL,
+    SET_IS_AUTH
 } from './actionTypes';
 
 const initialState = {
     isLoading: false,
     isError: false,
-    totalFundRaised: 0,
-    totalApplication: 0,
-    applicationList: [],
-    crowdy: {}
+    isAlert: { status: false, msg: "" },
+    contract: {},
+    wallet: {},
+    walletModal: false,
+    isAuth: false
 }
 
-const reducer = (state = initialState, {type, payload}) => {
+const reducer = (state = initialState, { type, payload }) => {
 
     switch (type) {
-        case SET_TOTAL_FUND_RAISED:
+        case SET_LOADING:
             return {
                 ...state,
-                totalFundRaised: payload
+                isLoading: payload
             }
-        case SET_TOTAL_APPLICATION:
+        case SET_ERROR:
             return {
                 ...state,
-                totalApplication: payload
+                isError: payload
             }
-        case SET_APPLICATION_LIST:
+        case SET_ALERT:
             return {
                 ...state,
-                applicationList: payload
+                isAlert: payload
             }
         case SET_CONTRACT_INSTANCE:
             return {
                 ...state,
-                crowdy: payload
+                contract: payload
+            }
+        case SET_WALLET:
+            return {
+                ...state,
+                wallet: payload
+            }
+        case SET_WALLET_MODAL:
+            return {
+                ...state,
+                walletModal: payload
+            }
+        case SET_IS_AUTH:
+            return {
+                ...state,
+                isAuth: payload
             }
         default:
             return state
     }
 }
 
-export {reducer}
+export { reducer }

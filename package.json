@@ -1,33 +1,21 @@
 {
   "name": "crowdy",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Crowd funding project based on ethereum blockchain network. built with solidity and ethers.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cd backend && npx hardhat test",
+    "deploy": "cd backend && npx hardhat run scripts/deploy.js --network rinkeby",
+    "start": "cd client && npm start"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akashvaghela09/crowdy.git"
+    "url": "git+https://github.com/akashvaghela09/dapp-template.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/akashvaghela09/crowdy/issues"
+    "url": "https://github.com/akashvaghela09/dapp-template/issues"
   },
-  "homepage": "https://github.com/akashvaghela09/crowdy#readme",
-  "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.5",
-    "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "chai": "^4.3.6",
-    "ethereum-waffle": "^3.4.0",
-    "ethers": "^5.5.4",
-    "hardhat": "^2.9.1"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^4.5.0",
-    "axios": "^0.26.0",
-    "dotenv": "^16.0.0"
-  }
+  "homepage": "https://github.com/akashvaghela09/dapp-template#readme"
 }

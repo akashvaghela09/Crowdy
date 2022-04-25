@@ -1,19 +1,21 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Application } from './Application';
-import { Fund } from './Fund';
-import { Home } from './Home';
+import { Route, Routes } from "react-router-dom";
+import { Home } from "./Home";
+import { Causes } from "./Causes";
+import { ContactMe } from "./ContactMe";
+import { PageNotFound } from "./PageNotFound";
+import { RaiseFund } from './RaiseFund';
 
 const AllRoutes = () => {
     return (
-        <div style={{width: "100%", height: "100%"}}>
-            <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/apply" element={<Application />} />
-                <Route exact path="/fund" element={<Fund />} />
-                <Route path="*" element={<h1>Page Not found</h1>}>
-                </Route>
-            </Routes>
+        <div className="bg-slate-300 h-fit">
+        <Routes>
+            <Route exact path="/" element={<Home />}/>
+            <Route exact path="/raise-fund" element={<RaiseFund />}/>
+            <Route exact path="/causes" element={<Causes />}/>
+            <Route exact path="/contact-me" element={<ContactMe />}/>
+            <Route exact path="*" element={<PageNotFound />}/>
+        </Routes>
         </div>
     )
 }
