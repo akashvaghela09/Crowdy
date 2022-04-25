@@ -49,7 +49,6 @@ const Home = () => {
     }
 
     useEffect(() => {
-        console.log("Inside useEffect");
         getData()
     }, []);
 
