@@ -1,7 +1,6 @@
 const { expect } = require("chai");
 const { ethers, waffle} = require("hardhat");
 
-// 0x51E821EE92486EfbaE1A63b2da3f75546084c6B8
 describe("Crowd Funding Project : Crowdy", function () {
     let CrowdFunding;   // contract name
     let Crowdy;         // instance name
@@ -21,16 +20,13 @@ describe("Crowd Funding Project : Crowdy", function () {
     
     describe("Check for initial values", function () {
         it("Total Funding Application list Should be zero at initial stage", async function () {
-
-            const total = await Crowdy.getTotalFundRaised();
-            // expect(await Crowdy.totalSupply()).to.equal(ownerBalance);
-            expect(total).to.equal(0);
+            const total = await Crowdy.getFundingData();
+            expect(total.length).to.equal(0);
+           
         });
-    
+
         it("Total Funding Amount Should be zero at initial stage", async function () {
-    
-            const total = await Crowdy.totalFundings();
-            // expect(await Crowdy.totalSupply()).to.equal(ownerBalance);
+            const total = await Crowdy.getTotalFundRaised();
             expect(total).to.equal(0);
         });
     })
@@ -38,7 +34,7 @@ describe("Crowd Funding Project : Crowdy", function () {
     describe("Check for data insertion", function () {
         it("Should add new Application for Fundrising", async function () {
             const newFunding = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
-            const data = await Crowdy.getFundingData(0);
+            const data = await Crowdy.getFundingItem(0);
     
             expect(data.title).to.equal("Cancer");
         });
@@ -47,9 +43,9 @@ describe("Crowd Funding Project : Crowdy", function () {
             const newFunding1 = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
             const newFunding2 = await Crowdy.addForFunding("H1N1", "need 2000 wei", "random.com", addr2.address, 2000);
             const newFunding3 = await Crowdy.addForFunding("Ebola", "need 5000 wei", "random.com", addr2.address, 5000);
-            const data = await Crowdy.totalFundings();
-    
-            expect(data).to.equal(3);
+            const data = await Crowdy.getFundingData();
+
+            expect(data.length).to.equal(3);
         });
     
         
@@ -58,35 +54,35 @@ describe("Crowd Funding Project : Crowdy", function () {
     describe("Check for data retrieval", function () {
         it("Should return correct Title after adding new Application for Fundrising", async function () {
             const newFunding = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
-            const data = await Crowdy.getFundingData(0);
+            const data = await Crowdy.getFundingItem(0);
     
             expect(data.title).to.equal("Cancer");
         });
     
         it("Should return correct Description after adding new Application for Fundrising", async function () {
             const newFunding = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
-            const data = await Crowdy.getFundingData(0);
+            const data = await Crowdy.getFundingItem(0);
     
             expect(data.description).to.equal("need 1000 wei");
         });
     
-        it("Should return correct Image URL after adding new Application for Fundrising", async function () {
+        it("Should return correct Image Id after adding new Application for Fundrising", async function () {
             const newFunding = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
-            const data = await Crowdy.getFundingData(0);
+            const data = await Crowdy.getFundingItem(0);
     
-            expect(data.imageUrl).to.equal("random.com");
+            expect(data.imageId).to.equal("random.com");
         });
     
         it("Should return correct Receiver's address after adding new Application for Fundrising", async function () {
             const newFunding = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
-            const data = await Crowdy.getFundingData(0);
+            const data = await Crowdy.getFundingItem(0);
     
             expect(data.receiver).to.equal(addr2.address);
         });
     
         it("Should return correct Target Amount after adding new Application for Fundrising", async function () {
             const newFunding = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
-            const data = await Crowdy.getFundingData(0);
+            const data = await Crowdy.getFundingItem(0);
     
             expect(data.target).to.equal(1000);
         });
@@ -96,7 +92,7 @@ describe("Crowd Funding Project : Crowdy", function () {
         it("Should retrun correct collection after funding the cause", async function () {
             const newFunding = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
             await Crowdy.connect(addr1).contribute(0, {value: 500});
-            const data = await Crowdy.getFundingData(0);
+            const data = await Crowdy.getFundingItem(0);
             
             expect(data.collection).to.equal(500);
         });
@@ -116,18 +112,23 @@ describe("Crowd Funding Project : Crowdy", function () {
         it("Should close the Application if fund transfer is done", async function () {
             const newFunding = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
             await Crowdy.connect(addr1).contribute(0, {value: 1000});
-            const data = await Crowdy.getFundingData(0);
+            const data = await Crowdy.getFundingItem(0);
             
             expect(data.isOpen).to.equal(false);
         });
 
         it("Should transfer the fund to correct receiver if collection is complete", async function () {
+            let fund = 1000
+            const balance1 = await provider.getBalance(addr2.address);
+            const bal1 = Number(balance1.toString())
+
             const newFunding = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
-            await Crowdy.connect(addr1).contribute(0, {value: 1000});
-            const data = await Crowdy.getFundingData(0);
+            await Crowdy.connect(addr1).contribute(0, {value: fund});
+            const data = await Crowdy.getFundingItem(0);
             
             const balance = await provider.getBalance(addr2.address);
-            expect(balance.toString()).to.equal("9999999969984085923120");
+            const bal2 = Number(balance.toString())
+            expect(bal2).to.equal(bal1 + fund);
         });
 
         it("Should not allow fund transfer if funding is done", async function () {
@@ -143,7 +144,7 @@ describe("Crowd Funding Project : Crowdy", function () {
             const newFunding = await Crowdy.addForFunding("Cancer", "need 1000 wei", "random.com", addr2.address, 1000);
             // await Crowdy.connect(addr1).contribute(0, {value: 1000});
             await Crowdy.changeFundingValidity(0);
-            const data = await Crowdy.getFundingData(0);
+            const data = await Crowdy.getFundingItem(0);
 
             expect(data.isValid).to.equal(false);
         });
