@@ -6,14 +6,19 @@ const metaMaskChecker = async () => {
             status: false,
             msg: "MetaMask is Locked !!"
         }
+    } else if (window.ethereum !== undefined && await metamask.isConnected() === false) {
+        return {
+            status: false,
+            msg: "MetaMask Not Connected !!"
+        }
     } else if (window.ethereum === undefined) {
         return {
             status: false,
             msg: "MetaMask Not Found !!"
         }
-    } 
+    }
 
-    return {status: true}
+    return { status: true }
 }
 
 const metamask = {

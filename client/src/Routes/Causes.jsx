@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../Redux/app/actions"
 import S3 from "aws-sdk/clients/s3";
+import commonWallet from "../Utils/commonWallet";
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router';
-import {
-    Routes,
-    Route,
-    Link,
-    Navigate,
-  } from 'react-router-dom';
+
 const Causes = () => {
     const dispatch = useDispatch();
-    let navigate = useNavigate();
     const [list, setList] = useState([]);
 
     const {
-        isAuth,
         contract
     } = useSelector(state => state.app)
 
@@ -46,67 +39,45 @@ const Causes = () => {
     }
 
     const getData = async () => {
-        // let data = await toast.promise(contract.getFundingData(), 
-        // {
-        //     pending: 'Getting Data ...',
-        //     success: 'Application Submitted 👌',
-        //     error: 'Something went wrong Data 🤯'
-        // }
-        // )
-
-        let data2 = await toast.promise(contract.getTotalFundingData(), 
-        {
-            pending: 'Getting Data ...',
-            success: 'Got the data 👌',
-            error: 'Something went wrong Data Length 🤯'
-        }
+        dispatch(setLoading(true))
+        let data = await toast.promise(commonWallet.getFundingData(),
+            {
+                error: 'Something went wrong 🤯'
+            }
         )
-           
-
-        // console.log(data)
-        console.log(data2.toString())
 
         let tempList = []
 
-        // for(let i = 0; i < data.length; i++){
-        //     let tempObj = {}
-        //     let item = data[i]
-        //     let url = await getImageUrl(item.imageId)
+        for(let i = 0; i < data.length; i++){
+            let tempObj = {}
+            let item = data[i]
+            let url = await getImageUrl(item.imageId)
             
-        //     tempObj["_id"] = item.id.toString()
-        //     tempObj["collection"] = item.collection.toString()
-        //     tempObj["target"] = item.target.toString()
-        //     tempObj["title"] = item.title
-        //     tempObj["description"] = item.description
-        //     tempObj["imageUrl"] = url
-        //     tempObj["receiver"] = item.receiver
-        //     tempObj["isOpen"] = item.isOpen
-        //     tempObj["isValid"] = item.isValid
-        //     tempObj["progress"] = "75%"
+            tempObj["_id"] = item.id.toString()
+            tempObj["collection"] = item.collection.toString()
+            tempObj["target"] = item.target.toString()
+            tempObj["title"] = item.title
+            tempObj["description"] = item.description
+            tempObj["imageUrl"] = url
+            tempObj["receiver"] = item.receiver
+            tempObj["isOpen"] = item.isOpen
+            tempObj["isValid"] = item.isValid
+            tempObj["progress"] = "75%"
             
-        //     tempList.push(tempObj)
-        // }
-
-        // setList([...tempList])
-    }
-    // console.log(list)
-
-    const checkAuth = () => {
-        if(isAuth === false){
-            console.log("isAuth: ", isAuth);
-            navigate("/")
+            tempList.push(tempObj)
         }
+
+        setList([...tempList])
+        dispatch(setLoading(false))
     }
-    
+
     useEffect(() => {
-        // checkAuth()
         getData()
     }, []);
 
     return (
-        <div className='h-full flex flex-col justify-center items-center'>
+        <div className='h-full min-h-screen flex flex-col justify-center items-center'>
             <h1 className='text-3xl text-slate-200 p-10'>Causes</h1>
-            <button onClick={() => getData()}>Get Data</button>
             <div className='flex w-full flex-wrap justify-evenly gap-5 mb-20'>
             {
                 list.length !== undefined && list.length > 0 && list.map((item, index) => {
