@@ -122,13 +122,13 @@ const Causes = () => {
 
     return (
         <div className='h-full min-h-screen flex flex-col justify-center items-center'>
-            <h1 className='text-3xl text-slate-200 p-10'>Causes</h1>
+            <h1 className='text-4xl text-slate-800 underline decoration-blue-500 font-bold p-10'>Contribute to Cause</h1>
             <div className='flex w-full flex-wrap justify-evenly gap-5 mb-20'>
                 {
                     list.length !== undefined && list.length > 0 && list.map((item, index) => {
                         return <div className='w-11/12 md:w-72 bg-slate-200 rounded-lg drop-shadow-lg m-4 flex flex-col items-center' key={"card-" + index}>
-                            <div className='w-full h-48 flex justify-center bg-slate-300 rounded-t-lg'>
-                                <img className='h-full w-full object-cover rounded-t-lg' src={item.imageUrl} alt="cover" />
+                            <div className='w-full h-48 flex justify-center bg-blue-300 rounded-t-lg'>
+                                <img className='h-full w-full object-cover rounded-t-lg' src={item.imageUrl} onError={(e) => e.target.src = "placeholder.jpg"} alt="cover" />
                             </div>
                             <p className='w-full text-xl font-bold  p-1 px-2 line-clamp-1'>{item.title}</p>
                             {/* <p className='w-full text-sm p-1 px-2 m-1  h-[70px] text-justify line-clamp-3'>{item.description}</p> */}

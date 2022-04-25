@@ -8,7 +8,7 @@ import { RaiseFund } from './RaiseFund';
 
 const AllRoutes = () => {
     return (
-        <div className="bg-slate-400 h-fit">
+        <div className="bg-slate-300 h-fit">
         <Routes>
             <Route exact path="/" element={<Home />}/>
             <Route exact path="/raise-fund" element={<RaiseFund />}/>

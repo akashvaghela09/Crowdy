@@ -117,8 +117,8 @@ const RaiseFund = () => {
 
     return (
         <div className='h-fit flex justify-center items-center flex-col'>
-            <h1 className='text-3xl text-slate-800 font-bold p-10'>Fill Your Application</h1>
-            <div className='bg-slate-300 w-11/12 py-12 h-fit drop-shadow-md rounded-md flex flex-col justify-center items-center mb-16'>
+            <h1 className='text-4xl text-slate-800 underline decoration-blue-500 font-bold p-10'>Fill Your Application</h1>
+            <div className='bg-slate-200 w-11/12 py-12 h-fit drop-shadow-md rounded-md flex flex-col justify-center items-center mb-16'>
                 <div className='flex flex-col md:flex-row items-center gap-10 md:justify-evenly md:items-stretch w-full grow'>
                     <div className='flex justify-center flex-col w-11/12 md:w-2/5'>
                         <label className='py-2 text-xl'>Title</label>
