@@ -79,7 +79,7 @@ const Home = () => {
                             <p className=" w-full text-xl md:text-3xl font-bold text-slate-700 p-3 md:p-6"><span className='underline decoration-pink-500'>Need Funds</span> to Pay For a Medical Emergency or Social Cause ?</p>
                             <div className=' md:p-6 flex flex-col md:gap-4'>
                                 <p className="pl-3 w-full md:text-lg  text-slate-700 ">Crowdy's <b className='md:text-2xl font-bold'>0% Platform fees</b> ensures <br />maximum funds for you</p>
-                                <button onClick={() => handleRoute("causes")} className='mt-4 md:m-2 flex justify-center items-center active:translate-y-1 bg-blue-500 active:bg-blue-600 text-neutral-100 rounded-b-2xl md:rounded-md w-full md:w-4/5 py-6 md:py-2 text-xl'> Start Crowd Funding for FREE</button>
+                                <button onClick={() => handleRoute("raise-fund")} className='mt-4 md:m-2 flex justify-center items-center active:translate-y-1 bg-blue-500 active:bg-blue-600 text-neutral-100 rounded-b-2xl md:rounded-md w-full md:w-4/5 py-6 md:py-2 text-xl'> Start Crowd Funding for FREE</button>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@ const Home = () => {
                             <p className=" w-full text-xl md:text-3xl font-bold text-slate-700 p-3 md:p-6">Want to make <span className='underline decoration-green-500'>change</span> ? <br /> Fund causes and make <span className='underline decoration-green-500'>impact</span>.</p>
                             <div className=' md:p-6 flex flex-col md:gap-4'>
                                 <p className="pl-3 w-full md:text-lg  text-slate-700 ">Crowdy's <b className='md:text-2xl font-bold'>0% Transfer fees</b> ensures <br />maximum contribution to cause.</p>
-                                <button onClick={() => handleRoute("raise-fund")} className='mt-4 md:m-2 flex justify-center items-center active:translate-y-1 bg-blue-500 active:bg-blue-600 text-neutral-100 rounded-b-2xl md:rounded-md w-full md:w-4/5 py-6 md:py-2 text-xl'> Start Funding to causes</button>
+                                <button onClick={() => handleRoute("causes")} className='mt-4 md:m-2 flex justify-center items-center active:translate-y-1 bg-blue-500 active:bg-blue-600 text-neutral-100 rounded-b-2xl md:rounded-md w-full md:w-4/5 py-6 md:py-2 text-xl'> Start Funding to causes</button>
                             </div>
                         </div>
                     </div>
