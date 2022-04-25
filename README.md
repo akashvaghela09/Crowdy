@@ -1,11 +1,11 @@
 <h1 align="center">
   <img alt="cgapp logo" src="https://vectorified.com/image/ethereum-logo-vector-13.png" width="224px"/><br/>
-  Dapp-template 
+  Crowdy 
   <br/>
   
 <br/>
 </h1>
-<p align="center">Ethereum blockchain based Dapp Integrated with frontend(React) and other necessary tools such as HardHat(for Testing and deployment). </p>
+<p align="center">Crowdy is a crowd funding Ethereum blockchain based Dapp Integrated with frontend(React) and other necessary tools such as HardHat(for Testing and deployment). </p>
 <p align="center">
 <img src="https://img.shields.io/website-up-down-green-red/http/solventx.in.svg" alt="website up"/>
 <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="maintained"/>
@@ -13,7 +13,7 @@
 </p>
 
 
-##  [🌐 Demo](https://solventx.in)
+##  [🌐 Demo](https://crowdy.app3.in)
 
 
 ## 🔧 Tech Stack 
@@ -45,7 +45,7 @@
 ## 📥 Installation
 - Start by cloning the repo with following command
 ```
-git clone https://github.com/akashvaghela09/dapp-template.git
+git clone https://github.com/akashvaghela09/crowdy.git
 ```
 
 ## 🔗 Setup Backend
@@ -64,7 +64,12 @@ go to the client folder and install dependencies with `npm install`
 Create variables inside *.env* file as mentioned below
 
 ```
+REACT_APP_RINKEBY_URL
+REACT_APP_PRIVATE_KEY
 REACT_APP_CONTRACT_ADDRESS
+REACT_APP_STORJ_ACCESS_ID
+REACT_APP_STORJ_SECRET_KEY
+REACT_APP_STORJ_BUCKET
 ```
 
 ## 🤖 Commands

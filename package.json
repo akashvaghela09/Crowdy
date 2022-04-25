@@ -1,6 +1,6 @@
 {
-  "name": "dapp-template",
-  "version": "1.0.0",
+  "name": "crowdy",
+  "version": "2.0.0",
   "description": "Crowd funding project based on ethereum blockchain network. built with solidity and ethers.js",
   "main": "index.js",
   "scripts": {

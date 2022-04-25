@@ -74,12 +74,12 @@ const RaiseFund = () => {
 
         if(isAuth === false){
             dispatch(setLoading(false))
-            toast.error("Connect your wallet first!")
+            toast.error("Connect your wallet first! 🤦")
             return
         }
 
         if(title === "" || description === "" || amount === "" || address === "" || file === ""){
-            toast.error("Please fill all the fields")
+            toast.error("Please fill all the fields 🤦")
             dispatch(setLoading(false))
             return
         }
@@ -87,18 +87,18 @@ const RaiseFund = () => {
         let imageKey = await toast.promise(
             uploadImage(),
             {
-                pending: 'Uploading Image...',
-                success: 'Image Uploaded 👌',
-                error: 'Something went wrong 🤯'
+                pending: 'Uploading Image... ⏳',
+                success: 'Image Uploaded 👍',
+                error: 'Something went wrong 🤦'
             }
         )
 
         let form = await toast.promise(
             contract.addForFunding(title, description, imageKey, address, amount),
             {
-                pending: 'Submitting ...',
-                success: 'Application Submitted 👌',
-                error: 'Something went wrong 🤯'
+                pending: 'Submitting ... ⏳',
+                success: 'Application Submitted 👍',
+                error: 'Something went wrong 🤦'
             }
         )
 

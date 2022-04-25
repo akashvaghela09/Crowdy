@@ -45,7 +45,7 @@ const Causes = () => {
         dispatch(setLoading(true))
         let data = await toast.promise(commonWallet.getFundingData(),
             {
-                error: 'Something went wrong 🤯'
+                error: 'Something went wrong 🤦'
             }
         )
 
@@ -104,15 +104,15 @@ const Causes = () => {
     const handleDonate = async (para) => {
         dispatch(setLoading(true))
 
-            console.log("");
-
-            let data = await toast.promise(contract.contribute(para, { value: donateAmount }),
-                {
-                    pending: 'Funding ...',
-                    success: 'Project Funded 👌',
-                    error: 'Something went wrong 🤯'
-                }
-            ).then((res) => console.log(res)).catch((err) => {
+        let data = await toast.promise(contract.contribute(para, { value: donateAmount }),
+            {
+                pending: 'Funding ... ⏳',
+                success: 'Project Funded 👍',
+                error: 'Something went wrong 🤦'
+            }
+        )
+            .then((res) => console.log(res))
+            .catch((err) => {
                 console.log(err.code)
                 console.log(err.data)
                 console.log(err.error.message)
@@ -122,8 +122,8 @@ const Causes = () => {
 
                 dispatch(setLoading(false))
             })
-            handleDonateModalClose()
-            getData()
+        handleDonateModalClose()
+        getData()
     }
 
     useEffect(() => {
