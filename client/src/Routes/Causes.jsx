@@ -104,14 +104,24 @@ const Causes = () => {
     const handleDonate = async (para) => {
         dispatch(setLoading(true))
 
+            console.log("");
+
             let data = await toast.promise(contract.contribute(para, { value: donateAmount }),
                 {
                     pending: 'Funding ...',
                     success: 'Project Funded 👌',
                     error: 'Something went wrong 🤯'
                 }
-            )
-            await data.wait()
+            ).then((res) => console.log(res)).catch((err) => {
+                console.log(err.code)
+                console.log(err.data)
+                console.log(err.error.message)
+                toast.error(err.error.message)
+                console.log(err.message.data)
+                console.log(err)
+
+                dispatch(setLoading(false))
+            })
             handleDonateModalClose()
             getData()
     }
@@ -149,7 +159,7 @@ const Causes = () => {
                     <div onClick={() => handleDonateModalClose()} className='fixed top-0 left-0 bg-black/30 backdrop-blur-sm w-screen h-screen' />
                     <div className="flex flex-col items-center justify-center fixed top-1/2 left-1/2 h-fit  w-3/4 md:w-1/3 border-none bg-slate-300 shadow-lg rounded-md translate-x-[-50%] translate-y-[-50%]">
                         <div className='w-full h-48 flex justify-center bg-slate-300 rounded-t-lg'>
-                            <img className='h-full w-full object-cover rounded-t-lg' src={tempItem.imageUrl} alt="cover" />
+                            <img className='h-full w-full object-cover rounded-t-lg' src={tempItem.imageUrl} onError={(e) => e.target.src = "placeholder.jpg"} alt="cover" />
                         </div>
                         <p className='w-full text-xl font-bold  p-1 px-2 md:px-6 line-clamp-1'>{tempItem.title}</p>
                         <p className='w-full text-sm px-2 m-1 md:px-6 text-justify line-clamp-3'>{tempItem.description}</p>

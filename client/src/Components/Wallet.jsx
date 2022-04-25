@@ -151,7 +151,7 @@ const Wallet = () => {
                 <div>
                     <div className='fixed top-0 px-2 left-0 bg-gray-900/30 backdrop-blur-sm w-screen h-screen' onClick={() => dispatch(setWalletModal(false))} ></div>
                     <Fade>
-                        <div className='flex flex-col items-center justify-center fixed top-1/2 left-1/2 h-fit py-8 w-3/4 md:w-1/3 border-none bg-slate-700 shadow-lg rounded-md translate-x-[-50%] translate-y-[-50%]'>
+                        <div className='flex flex-col items-center justify-center fixed top-1/2 left-1/2 h-fit py-8 w-3/4 md:w-1/3 border-none bg-slate-300 shadow-lg rounded-md translate-x-[-50%] translate-y-[-50%]'>
                             {
                                 userWalletLoading === false ?
                                     <button onClick={() => handleWalletUser("user")} className='active:translate-y-1 bg-blue-500 text-neutral-100 rounded-md w-4/5 py-2 m-2 text-xl hover:bg-blue-600'>Connect your Wallet</button>
@@ -161,7 +161,7 @@ const Wallet = () => {
                             }
                             <div className="p-4 flex w-4/5 justify-center items-center">
                                 <div className='bg-slate-500 h-[2px] flex grow' />
-                                <p className='m-2 text-slate-300'>OR</p>
+                                <p className='m-2 text-slate-700'>OR</p>
                                 <div className='bg-slate-500 h-[2px] flex grow' />
                             </div>
                             {
@@ -179,32 +179,32 @@ const Wallet = () => {
 
             {
                 profileModal === true &&                                                                                // -4px 5px 12px 0px rgba(5,8,15,0.77)
-                <div className='absolute top-[65px] right-2  w-fit h-fit flex flex-col items-center rounded bg-slate-700 py-2 drop-shadow-[-4px_5px_12px_rgba(5,8,15,0.77)]'>
-                    <FaUserCircle className='text-6xl text-slate-300 my-4' />
+                <div className='absolute top-[65px] right-2  w-fit h-fit flex flex-col items-center rounded bg-slate-300 py-2 drop-shadow-[-4px_5px_12px_rgba(5,8,15,0.77)]'>
+                    <FaUserCircle className='text-6xl text-slate-800 my-4' />
                     <div className='flex items-center p-2 px-4'>
-                        <p className='text-slate-300 m-1'>ETH : {concatString(wallet.accounts[0])}</p>
-                        <BiCopy onClick={() => navigator.clipboard.writeText(wallet.accounts[0])} className="m-1 text-xl fill-slate-300 active:translate-y-1 cursor-pointer" />
-                        <GoLinkExternal onClick={() => window.open(`https://rinkeby.etherscan.io/address/${wallet.accounts[0]}`, '_blank')} className="m-1 text-xl fill-slate-300 active:translate-y-1 cursor-pointer" />
+                        <p className='text-slate-800 m-1'>ETH : {concatString(wallet.accounts[0])}</p>
+                        <BiCopy onClick={() => navigator.clipboard.writeText(wallet.accounts[0])} className="m-1 text-xl fill-slate-800 active:translate-y-1 cursor-pointer" />
+                        <GoLinkExternal onClick={() => window.open(`https://rinkeby.etherscan.io/address/${wallet.accounts[0]}`, '_blank')} className="m-1 text-xl fill-slate-800 active:translate-y-1 cursor-pointer" />
                     </div>
-                    <div className='flex items-center border-[1px] border-slate-600 w-full'>
-                        <FaEthereum className="fill-slate-300 m-1 text-xl" />
+                    <div className='flex items-center border-[1px] border-slate-400 w-full'>
+                        <FaEthereum className="fill-slate-800 m-1 text-xl" />
                         <div className="flex grow justify-between">
-                            <p className="text-slate-300 px-2">Balance</p>
-                            <p className="text-slate-300 px-2">{concatString(wallet.balance)}</p>
+                            <p className="text-slate-800 px-2">Balance</p>
+                            <p className="text-slate-800 px-2">{concatString(wallet.balance)}</p>
                         </div>
                     </div>
-                    <div className='flex items-center border-[1px] border-slate-600 w-full'>
-                        <IoWalletOutline className="text-slate-300 m-1 text-xl" />
+                    <div className='flex items-center border-[1px] border-slate-400 w-full'>
+                        <IoWalletOutline className="text-slate-800 m-1 text-xl" />
                         <div className="flex grow justify-between">
-                            <p className="text-slate-300 px-2">Wallet</p>
-                            <p className="text-slate-300 px-2">{wallet.name}</p>
+                            <p className="text-slate-800 px-2">Wallet</p>
+                            <p className="text-slate-800 px-2">{wallet.name}</p>
                         </div>
                     </div>
-                    <div className='flex items-center border-[1px] border-slate-600 w-full'>
-                        <SiHiveBlockchain className="fill-slate-300 m-1 text-xl" />
+                    <div className='flex items-center border-[1px] border-slate-400 w-full'>
+                        <SiHiveBlockchain className="fill-slate-800 m-1 text-xl" />
                         <div className="flex grow justify-between">
-                            <p className="text-slate-300 px-2">Network</p>
-                            <p className="text-slate-300 px-2">{networkObj[wallet.network]}</p>
+                            <p className="text-slate-800 px-2">Network</p>
+                            <p className="text-slate-800 px-2">{networkObj[wallet.network]}</p>
                         </div>
                     </div>
                     {
