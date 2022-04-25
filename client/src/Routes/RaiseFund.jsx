@@ -72,13 +72,13 @@ const RaiseFund = () => {
         dispatch(setLoading(true))
         let response = await metaMaskChecker();
 
-        if(isAuth === false){
+        if (isAuth === false) {
             dispatch(setLoading(false))
             toast.error("Connect your wallet first! 🤦")
             return
         }
 
-        if(title === "" || description === "" || amount === "" || address === "" || file === ""){
+        if (title === "" || description === "" || amount === "" || address === "" || file === "") {
             toast.error("Please fill all the fields 🤦")
             dispatch(setLoading(false))
             return

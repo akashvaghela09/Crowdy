@@ -19,5 +19,3 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
-// 0x9862A243E2c8014BEF306cf231C2a16CC75c0c6A

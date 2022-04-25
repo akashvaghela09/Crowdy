@@ -21,11 +21,11 @@ const Home = () => {
     const getData = async () => {
         dispatch(setLoading(true))
         let data = await commonWallet.getFundingData()
-        
+
         let totalCompleted = 0;
         for (let i = 0; i < data.length; i++) {
             let item = data[i]
-            if(item.isOpen === false) {
+            if (item.isOpen === false) {
                 totalCompleted++
             }
         }

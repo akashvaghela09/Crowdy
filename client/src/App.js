@@ -16,11 +16,10 @@ function App() {
 
   return (
     <div className="bg-slate-400 h-screen max-h-screen">
-
-    <Header />
-    <AllRoutes />
-    <Footer />
-{
+      <Header />
+      <AllRoutes />
+      <Footer />
+      {
         isLoading === true && <Spinner />
       }
       {

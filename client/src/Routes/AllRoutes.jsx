@@ -9,13 +9,13 @@ import { RaiseFund } from './RaiseFund';
 const AllRoutes = () => {
     return (
         <div className="bg-slate-300 h-fit">
-        <Routes>
-            <Route exact path="/" element={<Home />}/>
-            <Route exact path="/raise-fund" element={<RaiseFund />}/>
-            <Route exact path="/causes" element={<Causes />}/>
-            <Route exact path="/contact-me" element={<ContactMe />}/>
-            <Route exact path="*" element={<PageNotFound />}/>
-        </Routes>
+            <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/raise-fund" element={<RaiseFund />} />
+                <Route exact path="/causes" element={<Causes />} />
+                <Route exact path="/contact-me" element={<ContactMe />} />
+                <Route exact path="*" element={<PageNotFound />} />
+            </Routes>
         </div>
     )
 }
