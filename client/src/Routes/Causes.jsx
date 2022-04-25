@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../Redux/app/actions"
 import S3 from "aws-sdk/clients/s3";
@@ -104,6 +104,12 @@ const Causes = () => {
     const handleDonate = async (para) => {
         dispatch(setLoading(true))
 
+        if (donateAmount === "") {
+            toast.error("Please enter amount to donate!")
+            dispatch(setLoading(false))
+            return
+        }
+
         let data = await toast.promise(contract.contribute(para, { value: donateAmount }),
             {
                 pending: 'Funding ... ⏳',
@@ -111,19 +117,15 @@ const Causes = () => {
                 error: 'Something went wrong 🤦'
             }
         )
-            .then((res) => console.log(res))
+            .then(async (res) => {
+                await res.wait()
+                handleDonateModalClose()
+                getData()
+            })
             .catch((err) => {
-                console.log(err.code)
-                console.log(err.data)
-                console.log(err.error.message)
-                toast.error(err.error.message)
-                console.log(err.message.data)
                 console.log(err)
-
                 dispatch(setLoading(false))
             })
-        handleDonateModalClose()
-        getData()
     }
 
     useEffect(() => {

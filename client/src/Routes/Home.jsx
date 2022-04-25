@@ -20,27 +20,36 @@ const Home = () => {
 
     const getData = async () => {
         dispatch(setLoading(true))
-        let data = await commonWallet.getFundingData()
 
-        let totalCompleted = 0;
-        for (let i = 0; i < data.length; i++) {
-            let item = data[i]
-            if (item.isOpen === false) {
-                totalCompleted++
+        let data = await commonWallet.getFundingData()
+        .then((res) => {
+            setTotalCauses(res.length)
+
+            let totalCompleted = 0;
+            for (let i = 0; i < res.length; i++) {
+                let item = res[i]
+                if (item.isOpen === false) {
+                    totalCompleted++
+                }
             }
-        }
+
+            setTotalCompleted(totalCompleted)
+            setTotalOpen(res.length - totalCompleted)
+        })
+        .catch((err) => {
+            dispatch(setLoading(false))
+            console.log("err", err)
+        })
 
         let totalFund = await commonWallet.getTotalFundRaised()
         const ethValue = Math.floor(ethers.utils.formatEther(totalFund) * 100) / 100;
+        
         setTotalRaised(ethValue)
-        setTotalCompleted(totalCompleted)
-        setTotalCauses(data.length)
-        setTotalOpen(data.length - totalCompleted)
-
         dispatch(setLoading(false))
     }
 
     useEffect(() => {
+        console.log("Inside useEffect");
         getData()
     }, []);
 
