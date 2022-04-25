@@ -3,7 +3,7 @@ import React from 'react';
 const PageNotFound = () => {
     return (
         <div className=''>
-            <h1 className='text-xl text-slate-200 p-10'>Page Not Found</h1>
+            <h1 className='text-4xl md:text-6xl font-bold text-slate-800 p-10 h-screen flex justify-center items-center'>Page Not Found 😬</h1>
         </div>
     )
 }
