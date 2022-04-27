@@ -116,6 +116,7 @@ const Wallet = () => {
             dispatch(setIsAuth(false))
             dispatch(setWalletModal(false))
             dispatch(setWallet({}))
+            dispatch(setContractInstance({}))
         }, 1500);
     }
 

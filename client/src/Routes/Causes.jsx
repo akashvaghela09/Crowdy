@@ -114,7 +114,7 @@ const Causes = () => {
             {
                 pending: 'Funding ... ⏳',
                 success: 'Project Funded 👍',
-                error: 'Something went wrong 🤦'
+                // error: 'Something went wrong 🤦'
             }
         )
             .then(async (res) => {
@@ -123,7 +123,8 @@ const Causes = () => {
                 getData()
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err.error.message)
+                toast.error(`${err.error.message} 🤦`)
                 dispatch(setLoading(false))
             })
     }
