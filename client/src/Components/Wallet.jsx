@@ -53,7 +53,7 @@ const Wallet = () => {
                     connectWallet(para)
                 } else {
                     dispatch(setWalletModal(false))
-                    toast.error(response.msg)
+                    toast.error(response.msg, {autoClose: false})
                 }
             }, 1500);
         } else if (para === "guest") {

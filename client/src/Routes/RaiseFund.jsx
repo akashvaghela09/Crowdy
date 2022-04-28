@@ -74,12 +74,12 @@ const RaiseFund = () => {
 
         if (isAuth === false) {
             dispatch(setLoading(false))
-            toast.error("Connect your wallet first! 🤦")
+            toast.error("Connect your wallet first! 🤦", {autoClose: false})
             return
         }
 
         if (title === "" || description === "" || amount === "" || address === "" || file === "") {
-            toast.error("Please fill all the fields 🤦")
+            toast.error("Please fill all the fields 🤦", {autoClose: false})
             dispatch(setLoading(false))
             return
         }

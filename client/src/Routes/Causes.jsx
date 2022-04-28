@@ -14,6 +14,7 @@ const Causes = () => {
     const [donateAmount, setDonateAmount] = useState("");
 
     const {
+        wallet,
         isAuth,
         contract
     } = useSelector(state => state.app)
@@ -84,7 +85,7 @@ const Causes = () => {
 
         if (isAuth === false) {
             dispatch(setLoading(false))
-            toast.error("Connect your wallet first!")
+            toast.error("Connect your wallet first!",  {autoClose: false})
             return
         }
 
@@ -105,7 +106,7 @@ const Causes = () => {
         dispatch(setLoading(true))
 
         if (donateAmount === "") {
-            toast.error("Please enter amount to donate!")
+            toast.error("Please enter amount to donate!", {autoClose: false})
             dispatch(setLoading(false))
             return
         }
@@ -124,7 +125,11 @@ const Causes = () => {
             })
             .catch((err) => {
                 console.log(err.error.message)
-                toast.error(`${err.error.message} 🤦`)
+                if(wallet.accounts[0] === "0x000000000000000000000000"){
+                    toast.error(`${err.error.error.error.message} 🤦`, {autoClose : false})
+                } else {
+                    toast.error(`${err.error.message} 🤦`, {autoClose : false})
+                }
                 dispatch(setLoading(false))
             })
     }

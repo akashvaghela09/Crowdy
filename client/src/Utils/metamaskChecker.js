@@ -14,7 +14,7 @@ const metaMaskChecker = async () => {
     } else if (window.ethereum === undefined) {
         return {
             status: false,
-            msg: "MetaMask Not Found !!"
+            msg: "MetaMask Not Found !! \n Please Continue as a Guest"
         }
     }
 
