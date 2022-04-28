@@ -9,7 +9,7 @@ const ContactMe = () => {
                 <p className='text-4xl md:text-6xl text-slate-800 font-bold p-2 text-center'>Hi there 👋</p>
                 <p className='text-xl md:text-2xl text-slate-800 p-2 text-center'>Let's Connect 👇</p>
             </div>
-            <div className='flex flex-wrap w-4/5 md:w-3/5 mb-10 justify-center items-center '>
+            <div className='flex flex-wrap w-4/5 mb-10 justify-center items-center'>
                 <a href='mailto:akashvaghela09@gmail.com' rel="noreferrer" target="_blank" className="flex flex-col justify-center items-center m-4 bg-slate-700 rounded active:translate-y-1 cursor-pointer w-24 h-24">
                     <AiOutlineMail className='text-6xl fill-slate-300' />
                     <p className='text-slate-300'>Mail</p>
