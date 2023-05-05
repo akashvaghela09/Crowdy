@@ -1,6 +1,14 @@
 require("@nomiclabs/hardhat-waffle");
 require("dotenv").config();
 
+const {
+  MATIC_RPC_URL,
+  SEPOLIA_RPC_URL,
+  POLYGONSCAN_API_KEY,
+  ETHERSCAN_API_KEY,
+  PRIVATE_KEY
+} = process.env;
+
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
@@ -18,14 +26,34 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.4",
+  defaultNetwork: "hardhat",
+  solidity: "0.8.18",
+  settings: {
+    optimizer: {
+      enabled: true,
+      runs: 1000,
+    },
+  },
   networks: {
-    rinkeby: {
-      url: process.env.RINKEBY_URL,
-      accounts: [process.env.PRIVATE_KEY]
+    hardhat: {
+      chainId: 1337
+    },
+    mumbai: {
+      url: MATIC_RPC_URL,
+      accounts: [PRIVATE_KEY],
+    },
+    sepolia: {
+      url: SEPOLIA_RPC_URL,
+      accounts: [PRIVATE_KEY],
     }
   },
-  paths: {
-    artifacts: "../client/src/artifacts"
-  }
+  etherscan: {
+    apiKey: {
+        sepolia: ETHERSCAN_API_KEY,
+        mumbai: POLYGONSCAN_API_KEY,
+    }
+  },
+  // paths: {
+  //   artifacts: "../client/src/artifacts"
+  // },
 };
