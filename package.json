@@ -1,21 +1,16 @@
 {
   "name": "crowdy",
   "version": "2.0.0",
-  "description": "Crowd funding project based on ethereum blockchain network. built with solidity and ethers.js",
+  "description": "Crowd funding project. built with solidity and HardHat",
   "main": "index.js",
-  "scripts": {
-    "test": "cd backend && npx hardhat test",
-    "deploy": "cd backend && npx hardhat run scripts/deploy.js --network rinkeby",
-    "start": "cd client && npm start"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akashvaghela09/dapp-template.git"
+    "url": "git+https://github.com/akashvaghela09/crowdy.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/akashvaghela09/dapp-template/issues"
+    "url": "https://github.com/akashvaghela09/crowdy/issues"
   },
-  "homepage": "https://github.com/akashvaghela09/dapp-template#readme"
+  "homepage": "https://github.com/akashvaghela09/crowdy#readme"
 }

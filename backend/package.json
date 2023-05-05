@@ -1,11 +1,14 @@
 {
   "name": "crowdy",
   "version": "1.0.0",
-  "description": "Crowd funding project based on ethereum blockchain network. built with solidity and ethers.js",
+  "description": "Crowd funding project. built with solidity and HardHat",
   "main": "index.js",
   "scripts": {
-    "test": "npx hardhat test",
-    "deploy": "npx hardhat run scripts/deploy.js --network rinkeby"
+    "deploy-local": "npx hardhat --network localhost run scripts/deploy.js",
+    "deploy-mumbai": "npx hardhat --network mumbai run scripts/deploy.js",
+    "deploy-sepolia": "npx hardhat --network sepolia run scripts/deploy.js",
+    "verify-mumbai": "npx hardhat verify --network mumbai --contract contracts/CrowdFunding.sol:CrowdFunding 0x00000000000000000",
+    "verify-sepolia": "npx hardhat verify --network sepolia --contract contracts/CrowdFunding.sol:CrowdFunding 0x00000000000000000"
   },
   "repository": {
     "type": "git",
@@ -24,7 +27,7 @@
     "chai": "^4.3.6",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.5.4",
-    "hardhat": "^2.9.1"
+    "hardhat": "^2.14.0"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.5.0",
