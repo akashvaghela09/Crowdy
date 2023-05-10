@@ -3,6 +3,13 @@
   "version": "2.0.0",
   "description": "Crowd funding project. built with solidity and HardHat",
   "main": "index.js",
+  "scripts": {
+    "deploy-local": "npx hardhat --network localhost run scripts/deploy.js",
+    "deploy-mumbai": "npx hardhat --network mumbai run scripts/deploy.js",
+    "deploy-sepolia": "npx hardhat --network sepolia run scripts/deploy.js",
+    "verify-mumbai": "npx hardhat verify --network mumbai --contract contracts/CrowdFunding.sol:CrowdFunding 0x00000000000000000",
+    "verify-sepolia": "npx hardhat verify --network sepolia --contract contracts/CrowdFunding.sol:CrowdFunding 0x00000000000000000"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/akashvaghela09/crowdy.git"
