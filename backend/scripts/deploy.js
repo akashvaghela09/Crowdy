@@ -1,22 +1,20 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-    const Ben10ItemCollection = await ethers.getContractFactory(
-        "CrowdFunding"   // Contract Name
-    );
+    const [deployer] = await ethers.getSigners();
+    console.log("\nDeploying contracts with the account:", deployer.address);
 
-    // Create new instance
-    const Crowdy = await Ben10ItemCollection.deploy()
-
-    await Crowdy.deployed();
-    console.log("Success, Contract Deployed: ", Crowdy.address);
+    const CrowdFunding = await ethers.getContractFactory("CrowdFunding");
+    const crowdFunding = await CrowdFunding.deploy();
+    await crowdFunding.deployed();
+    console.log("\nSuccess! \nCrowdFunding deployed to:", crowdFunding.address);
 }
 
 main()
-.then(() => {
-    process.exit(0)
-})
-.catch((err) => {
-    console.error(err);
-    process.exit(1);
-})
+    .then(() => {
+        process.exit(0)
+    })
+    .catch((err) => {
+        console.error(err);
+        process.exit(1);
+    })
