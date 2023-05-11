@@ -3,6 +3,12 @@
 pragma solidity ^0.8.9;
 
 contract CrowdFunding {
+    uint256 internal nextId = 0;
+    uint256 internal totalFundingRaised = 0;
+    address internal owner;
+
+    mapping(uint256 => Funding) public fundingRecords;
+
     struct Funding {
         uint256 id;
         string title;
@@ -20,12 +26,6 @@ contract CrowdFunding {
         uint256 funded;
     }
 
-    uint256 internal nextId = 0;
-    uint256 internal totalFundingRaised = 0;
-    address internal owner;
-
-    mapping(uint256 => Funding) public fundingRecords;
-
     event newProjectAdded(uint256 id, string title, uint256 target);
     event contributionAdded(uint256 id, string title, uint256 amount);
     event projectClosed(uint256 id, string title);
@@ -33,6 +33,50 @@ contract CrowdFunding {
 
     constructor() {
         owner = msg.sender;
+    }
+
+    modifier checkIfOwner() {
+        require(msg.sender == owner, "Not an authorized person !!");
+
+        _;
+    }
+
+    modifier checkIfReceiver(uint256 _id) {
+        require(
+            fundingRecords[_id].receiver != msg.sender,
+            "You can't fund your own cause !!"
+        );
+
+        _;
+    }
+
+    modifier checkIfOpen(uint256 _id) {
+        require(fundingRecords[_id].isOpen == true, "Already Funded !!");
+        require(
+            fundingRecords[_id].deadline > block.timestamp,
+            "Funding closed !!"
+        );
+
+        _;
+    }
+
+    modifier checkFundingAmount(uint256 _id) {
+        require(
+            msg.value <=
+                (fundingRecords[_id].target - fundingRecords[_id].collected),
+            "Funding amount exceeds targeted amount !!"
+        );
+
+        _;
+    }
+
+    modifier checkIfValid(uint256 _id) {
+        require(
+            fundingRecords[_id].isPaushed == false,
+            "Can't fund for this cause, funding paushed !!"
+        );
+
+        _;
     }
 
     function addForFunding(
@@ -115,49 +159,5 @@ contract CrowdFunding {
                 emit refundTransferred(_id, project.title);
             }
         }
-    }
-
-    modifier checkIfOwner() {
-        require(msg.sender == owner, "Not an authorized person !!");
-
-        _;
-    }
-
-    modifier checkIfReceiver(uint256 _id) {
-        require(
-            fundingRecords[_id].receiver != msg.sender,
-            "You can't fund your own cause !!"
-        );
-
-        _;
-    }
-
-    modifier checkIfOpen(uint256 _id) {
-        require(fundingRecords[_id].isOpen == true, "Already Funded !!");
-        require(
-            fundingRecords[_id].deadline > block.timestamp,
-            "Funding closed !!"
-        );
-
-        _;
-    }
-
-    modifier checkFundingAmount(uint256 _id) {
-        require(
-            msg.value <=
-                (fundingRecords[_id].target - fundingRecords[_id].collected),
-            "Funding amount exceeds targeted amount !!"
-        );
-
-        _;
-    }
-
-    modifier checkIfValid(uint256 _id) {
-        require(
-            fundingRecords[_id].isPaushed == false,
-            "Can't fund for this cause, funding paushed !!"
-        );
-
-        _;
     }
 }
