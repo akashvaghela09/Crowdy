@@ -26,6 +26,11 @@ contract CrowdFunding {
 
     mapping(uint256 => Funding) public fundingRecords;
 
+    event newProjectAdded(uint256 id, string title, uint256 target);
+    event contributionAdded(uint256 id, string title, uint256 amount);
+    event projectClosed(uint256 id, string title);
+    event refundTransferred(uint256 id, string title);
+
     constructor() {
         owner = msg.sender;
     }
@@ -44,6 +49,7 @@ contract CrowdFunding {
         project.deadline = _deadline;
         project.isOpen = true;
 
+        emit newProjectAdded(nextId, _title, _target);
         nextId += 1;
     }
 
@@ -80,6 +86,8 @@ contract CrowdFunding {
         Funding storage project = fundingRecords[_id];
         project.contributors.push(Contributor(payable(msg.sender), msg.value));
 
+        emit contributionAdded(_id, project.title, msg.value);
+
         if (fundingRecords[_id].collected == fundingRecords[_id].target) {
             fundingRecords[_id].isOpen = false;
 
@@ -87,6 +95,8 @@ contract CrowdFunding {
             uint256 fund = fundingRecords[_id].target;
 
             to.transfer(fund);
+
+            emit projectClosed(_id, project.title);
         }
     }
 
@@ -101,6 +111,8 @@ contract CrowdFunding {
             if (amount > 0) {
                 totalFundingRaised -= amount;
                 donor.refundId.transfer(amount);
+
+                emit refundTransferred(_id, project.title);
             }
         }
     }
