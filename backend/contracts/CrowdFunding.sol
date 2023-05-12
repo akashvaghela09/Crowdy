@@ -1,7 +1,11 @@
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.9;
 
+/**
+ * @title CrowdFunding
+ * @dev A smart contract for crowdfunding projects.
+ */
 contract CrowdFunding {
     uint256 internal nextId = 0;
     uint256 internal totalFundingRaised = 0;
@@ -17,7 +21,7 @@ contract CrowdFunding {
         uint256 collected;
         uint256 deadline;
         bool isOpen;
-        bool isPaushed;
+        bool isPaused;
         Contributor[] contributors;
     }
 
@@ -31,54 +35,78 @@ contract CrowdFunding {
     event projectClosed(uint256 id, string title);
     event refundTransferred(uint256 id, string title);
 
+    /**
+     * @dev Contract constructor.
+     */
     constructor() {
         owner = msg.sender;
     }
 
+    /**
+     * @dev Modifier to check if the caller is the contract owner.
+     */
     modifier checkIfOwner() {
-        require(msg.sender == owner, "Not an authorized person !!");
-
+        require(msg.sender == owner, "Not an authorized person!!");
         _;
     }
 
+    /**
+     * @dev Modifier to check if the caller is not the receiver of the funding.
+     * @param _id The ID of the funding project.
+     */
     modifier checkIfReceiver(uint256 _id) {
         require(
             fundingRecords[_id].receiver != msg.sender,
-            "You can't fund your own cause !!"
+            "You can't fund your own cause!!"
         );
-
         _;
     }
 
+    /**
+     * @dev Modifier to check if the funding project is open.
+     * @param _id The ID of the funding project.
+     */
     modifier checkIfOpen(uint256 _id) {
-        require(fundingRecords[_id].isOpen == true, "Already Funded !!");
+        require(fundingRecords[_id].isOpen == true, "Already Funded!!");
         require(
             fundingRecords[_id].deadline > block.timestamp,
-            "Funding closed !!"
+            "Funding closed!!"
         );
-
         _;
     }
 
+    /**
+     * @dev Modifier to check if the funding amount is valid.
+     * @param _id The ID of the funding project.
+     */
     modifier checkFundingAmount(uint256 _id) {
         require(
             msg.value <=
                 (fundingRecords[_id].target - fundingRecords[_id].collected),
-            "Funding amount exceeds targeted amount !!"
+            "Funding amount exceeds targeted amount!!"
         );
-
         _;
     }
 
+    /**
+     * @dev Modifier to check if the funding project is valid (not paused).
+     * @param _id The ID of the funding project.
+     */
     modifier checkIfValid(uint256 _id) {
         require(
-            fundingRecords[_id].isPaushed == false,
-            "Can't fund for this cause, funding paushed !!"
+            fundingRecords[_id].isPaused == false,
+            "Can't fund for this cause, funding paused!!"
         );
-
         _;
     }
 
+    /**
+     * @dev Adds a new project for funding.
+     * @param _title The title of the project.
+     * @param _receiver The address of the project receiver.
+     * @param _target The target amount to be raised.
+     * @param _deadline The deadline for the project.
+     */
     function addForFunding(
         string memory _title,
         address payable _receiver,
@@ -97,23 +125,44 @@ contract CrowdFunding {
         nextId += 1;
     }
 
+    /**
+     * @dev Retrieves the data of a specific project.
+     * @param _id The ID of the project.
+     * @return The Funding struct containing the project data.
+     */
     function getProjectData(uint256 _id) public view returns (Funding memory) {
         return fundingRecords[_id];
     }
 
+    /**
+     * @dev Retrieves the data of all projects.
+     * @return An array of Funding structs containing the project data.
+     */
     function getAllProjectsData() public view returns (Funding[] memory) {
         Funding[] memory list = new Funding[](nextId);
         return list;
     }
 
+    /**
+     * @dev Retrieves the total number of projects.
+     * @return The total number of projects.
+     */
     function totalProjects() public view returns (uint256) {
         return nextId;
     }
 
+    /**
+     * @dev Retrieves the total amount of funding raised.
+     * @return The total funding raised.
+     */
     function getTotalFundRaised() public view returns (uint256) {
         return totalFundingRaised;
     }
 
+    /**
+     * @dev Contributes funds to a project.
+     * @param _id The ID of the project.
+     */
     function contribute(
         uint256 _id
     )
@@ -144,6 +193,10 @@ contract CrowdFunding {
         }
     }
 
+    /**
+     * @dev Refunds funds to contributors for a specific project.
+     * @param _id The ID of the project.
+     */
     function refundFunds(uint256 _id) public checkIfOwner checkIfOpen(_id) {
         fundingRecords[_id].isOpen = false;
         Funding storage project = fundingRecords[_id];
