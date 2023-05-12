@@ -138,40 +138,6 @@ contract CrowdFunding {
     }
 
     /**
-     * @dev Retrieves the data of a specific project.
-     * @param _id The ID of the project.
-     * @return The Funding struct containing the project data.
-     */
-    function getProjectData(uint256 _id) public view returns (Funding memory) {
-        return fundingRecords[_id];
-    }
-
-    /**
-     * @dev Retrieves the data of all projects.
-     * @return An array of Funding structs containing the project data.
-     */
-    function getAllProjectsData() public view returns (Funding[] memory) {
-        Funding[] memory list = new Funding[](nextId);
-        return list;
-    }
-
-    /**
-     * @dev Retrieves the total number of projects.
-     * @return The total number of projects.
-     */
-    function totalProjects() public view returns (uint256) {
-        return nextId;
-    }
-
-    /**
-     * @dev Retrieves the total amount of funding raised.
-     * @return The total funding raised.
-     */
-    function getTotalFundRaised() public view returns (uint256) {
-        return totalFundingRaised;
-    }
-
-    /**
      * @dev Contributes funds to a project.
      * @param _id The ID of the project.
      */
@@ -229,5 +195,47 @@ contract CrowdFunding {
                 emit refundTransferred(_id, project.title);
             }
         }
+    }
+
+    /**
+     * @dev Pauses funding for a specific project.
+     * @param _id The ID of the project.
+     */
+    function pauseFunding(uint256 _id) public checkIfOwner {
+        fundingRecords[_id].isPaused = true;
+    }
+
+    /**
+     * @dev Retrieves the data of a specific project.
+     * @param _id The ID of the project.
+     * @return The Funding struct containing the project data.
+     */
+    function getProjectData(uint256 _id) public view returns (Funding memory) {
+        return fundingRecords[_id];
+    }
+
+    /**
+     * @dev Retrieves the data of all projects.
+     * @return An array of Funding structs containing the project data.
+     */
+    function getAllProjectsData() public view returns (Funding[] memory) {
+        Funding[] memory list = new Funding[](nextId);
+        return list;
+    }
+
+    /**
+     * @dev Retrieves the total number of projects.
+     * @return The total number of projects.
+     */
+    function totalProjects() public view returns (uint256) {
+        return nextId;
+    }
+
+    /**
+     * @dev Retrieves the total amount of funding raised.
+     * @return The total funding raised.
+     */
+    function getTotalFundRaised() public view returns (uint256) {
+        return totalFundingRaised;
     }
 }
