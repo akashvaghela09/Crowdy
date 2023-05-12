@@ -7,12 +7,18 @@ pragma solidity ^0.8.9;
  * @dev A smart contract for crowdfunding projects.
  */
 contract CrowdFunding {
+    /**
+     * @dev Variables for the contract.
+    */
     uint256 internal nextId = 0;
     uint256 internal totalFundingRaised = 0;
     address internal owner;
 
     mapping(uint256 => Funding) public fundingRecords;
 
+    /**
+     * @dev Structs for the contract.
+     */
     struct Funding {
         uint256 id;
         string title;
@@ -30,6 +36,9 @@ contract CrowdFunding {
         uint256 funded;
     }
 
+    /**
+     * @dev Events for the contract.
+     */
     event newProjectAdded(uint256 id, string title, uint256 target);
     event contributionAdded(uint256 id, string title, uint256 amount);
     event projectClosed(uint256 id, string title);
@@ -113,6 +122,7 @@ contract CrowdFunding {
         uint256 _target,
         uint256 _deadline
     ) public {
+        // create a new project
         Funding storage project = fundingRecords[nextId];
         project.id = nextId;
         project.title = _title;
@@ -122,6 +132,8 @@ contract CrowdFunding {
         project.isOpen = true;
 
         emit newProjectAdded(nextId, _title, _target);
+
+        // increment the project ID
         nextId += 1;
     }
 
@@ -173,6 +185,7 @@ contract CrowdFunding {
         checkIfReceiver(_id)
         checkFundingAmount(_id)
     {
+        // update the total funding raised and the project's collected amount
         fundingRecords[_id].collected += msg.value;
         totalFundingRaised += msg.value;
 
@@ -181,12 +194,14 @@ contract CrowdFunding {
 
         emit contributionAdded(_id, project.title, msg.value);
 
+        // close the project if the target is reached
         if (fundingRecords[_id].collected == fundingRecords[_id].target) {
             fundingRecords[_id].isOpen = false;
 
             address payable to = fundingRecords[_id].receiver;
             uint256 fund = fundingRecords[_id].target;
 
+            // transfer the funds to the receiver 
             to.transfer(fund);
 
             emit projectClosed(_id, project.title);
@@ -201,10 +216,12 @@ contract CrowdFunding {
         fundingRecords[_id].isOpen = false;
         Funding storage project = fundingRecords[_id];
 
+        // refund all contributors
         for (uint256 i = 0; i < project.contributors.length; i++) {
             Contributor memory donor = project.contributors[i];
             uint256 amount = donor.funded;
 
+            // refund only if the contributor has funded
             if (amount > 0) {
                 totalFundingRaised -= amount;
                 donor.refundId.transfer(amount);
