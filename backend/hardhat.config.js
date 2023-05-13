@@ -1,4 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-etherscan");
 require('solidity-coverage');
 require("dotenv").config();
 
@@ -51,7 +52,7 @@ module.exports = {
   etherscan: {
     apiKey: {
         sepolia: ETHERSCAN_API_KEY,
-        mumbai: POLYGONSCAN_API_KEY,
+        // mumbai: POLYGONSCAN_API_KEY,
     }
   },
   // paths: {

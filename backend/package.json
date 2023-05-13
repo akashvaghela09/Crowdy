@@ -7,8 +7,8 @@
     "deploy-local": "npx hardhat --network localhost run scripts/deploy.js",
     "deploy-mumbai": "npx hardhat --network mumbai run scripts/deploy.js",
     "deploy-sepolia": "npx hardhat --network sepolia run scripts/deploy.js",
-    "verify-mumbai": "npx hardhat verify --network mumbai --contract contracts/CrowdFunding.sol:CrowdFunding 0x00000000000000000",
-    "verify-sepolia": "npx hardhat verify --network sepolia --contract contracts/CrowdFunding.sol:CrowdFunding 0x00000000000000000"
+    "verify-mumbai": "npx hardhat verify --network mumbai --contract contracts/CrowdFunding.sol:CrowdFunding 0x352CfCce7e597eC550990e888aA738fa2149fceA",
+    "verify-sepolia": "npx hardhat verify --network sepolia --contract contracts/CrowdFunding.sol:CrowdFunding 0x352CfCce7e597eC550990e888aA738fa2149fceA"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/akashvaghela09/crowdy#readme",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
     "chai": "^4.3.6",
     "ethereum-waffle": "^3.4.0",
