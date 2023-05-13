@@ -34,6 +34,11 @@ describe("Crowd Funding Project : Crowdy \n", function () {
       const total = await Crowdy.getAllProjectsData();
       expect(total.length).to.equal(0);
     });
+
+    it("Project Index value Should be zero at initial stage", async function () {
+      const index = await Crowdy.totalProjects();
+      expect(index).to.equal(0);
+    });
   })
 
   describe("Check for data insertion", function () {
@@ -44,7 +49,7 @@ describe("Crowd Funding Project : Crowdy \n", function () {
       expect(data.title).to.equal("Cancer Treatment");
     });
 
-    it("Total Funding Application list should be updated after adding Applications", async function () {
+    it("Total Funding Application list should be updated after adding project", async function () {
       const newFunding1 = await Crowdy.addForFunding("Cancer Treatment", addr2.address, 1000, 2);
       const newFunding2 = await Crowdy.addForFunding("H1N1", addr2.address, 2000, 2);
       const newFunding3 = await Crowdy.addForFunding("Ebola", addr2.address, 5000, 2);
@@ -52,17 +57,24 @@ describe("Crowd Funding Project : Crowdy \n", function () {
 
       expect(data.length).to.equal(3);
     });
+
+    it("Project index / total project count should be updated after adding project", async function () {
+      await Crowdy.addForFunding("Cancer Treatment", addr2.address, 1000, 2);
+      const index = await Crowdy.totalProjects();
+
+      expect(index).to.equal(1);
+    });
   })
 
   describe("Check for data retrieval", function () {
-    it("Should return correct Title after adding new Application for Fundrising", async function () {
+    it("Should return correct Title after adding new project for Fundrising", async function () {
       const newFunding = await Crowdy.addForFunding("Cancer Treatment", addr2.address, 1000, 2);
       const data = await Crowdy.getProjectData(0);
 
       expect(data.title).to.equal("Cancer Treatment");
     });
 
-    it("Should return correct Receiver's address after adding new Application for Fundrising", async function () {
+    it("Should return correct Receiver's address after adding new project for Fundrising", async function () {
       const newFunding = await Crowdy.addForFunding("Cancer Treatment", addr2.address, 1000, 2);
       const data = await Crowdy.getProjectData(0);
 
