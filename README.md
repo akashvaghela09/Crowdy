@@ -28,6 +28,12 @@
 - [📥 Installation](#-installation)
 - [🔗 Setup Backend](#-setup-backend)
 - [🤖 Commands](#-commands)
+- [Technical Details](#technical-details)
+  - [Variables](#variables)
+  - [Structs](#structs)
+  - [Events](#events)
+  - [Modifiers](#modifiers)
+  - [Functions](#functions)
 - [👨🏻‍💻 Contributor](#-contributor)
 - [📩 Contact Me 👇](#-contact-me-)
 
@@ -96,6 +102,65 @@ npm run deploy-sepolia
 npm run verify-sepolia
 ```
 
+## Technical Details 
+| Feature              | Details                                     |
+| -------------------- | ------------------------------------------- |
+| Programming Language | Solidity                                    |
+| Version              | 0.8.9                                       |
+| Contract             | CrowdFunding                                |
+| License              | MIT                                         |
+| Description          | A smart contract for crowdfunding projects. |
+
+### Variables
+|Variable|	Description|
+|--|--|
+|nextId	| ID for the next project.|
+|totalFundingRaised	|Total amount of funding raised.|
+|dayCount	|The current day count.|
+|owner	|The owner of the contract.|
+|fundingRecords	|Mapping of Funding struct to their IDs.|
+
+### Structs
+
+|Struct|	Description|
+|--|--|
+|Funding	|Struct for storing project details, including ID, title, target amount, collected amount, deadline, status, and contributors.|
+|Contributor|	Struct for storing contributor details, including refund ID and funded amount.|
+
+### Events
+
+|Event|	Description|
+|--|--|
+|newProjectAdded|	Broadcast that new projects is added.|
+|contributionAdded	|Broadcast that contributions is added.|
+|projectClosed|	Broadcast that projects is now closed.|
+|refundTransferred	|Broadcast that refunds has transferred.|
+
+### Modifiers
+
+|Modifier|	Description|
+|--|--|
+|checkIfOwner()|	Checks if the caller is the contract owner.|
+|checkIfReceiver()|	Checks if the caller is not the receiver of the funding.|
+|checkIfOpen()|	Checks if the funding project is open.
+|checkFundingAmount()|	Checks if the funding amount is valid.|
+|checkIfValid()|	Checks if the funding project is valid (not paused).|
+
+### Functions
+
+|Function|	Description|
+|--|--|
+|addForFunding()	|Adds a new project for funding.|
+|contribute()	|Contributes funds to a project.|
+|refundFunds()	|Refunds funds to contributors for a specific project.|
+|pauseFunding()	|Pauses funding for a specific project.|
+|updateCounter()|	Update day count.|
+|getProjectData()	|Retrieves the data of a specific project.|
+|getAllProjectsData()	|Retrieves the data of all projects.|
+|totalProjects()|	Retrieves the total number of projects.|
+|getTotalFundRaised()	|Retrieves the total amount of funding raised.|
+
+***
 
 ## 👨🏻‍💻 Contributor
 - ## [Akash Vaghela](https://akash11.com)
