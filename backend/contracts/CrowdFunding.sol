@@ -9,9 +9,10 @@ pragma solidity ^0.8.9;
 contract CrowdFunding {
     /**
      * @dev Variables for the contract.
-    */
-    uint256 internal nextId = 0;
-    uint256 internal totalFundingRaised = 0;
+     */
+    uint256 internal nextId;
+    uint256 internal totalFundingRaised;
+    uint256 public dayCount;
     address internal owner;
 
     mapping(uint256 => Funding) public fundingRecords;
@@ -77,10 +78,7 @@ contract CrowdFunding {
      */
     modifier checkIfOpen(uint256 _id) {
         require(fundingRecords[_id].isOpen == true, "Already Funded!!");
-        require(
-            fundingRecords[_id].deadline > block.timestamp,
-            "Funding closed!!"
-        );
+        require(fundingRecords[_id].deadline > dayCount, "Funding closed!!");
         _;
     }
 
@@ -128,7 +126,7 @@ contract CrowdFunding {
         project.title = _title;
         project.receiver = payable(_receiver);
         project.target = _target;
-        project.deadline = _deadline;
+        project.deadline = _deadline + dayCount;
         project.isOpen = true;
 
         emit newProjectAdded(nextId, _title, _target);
@@ -167,7 +165,7 @@ contract CrowdFunding {
             address payable to = fundingRecords[_id].receiver;
             uint256 fund = fundingRecords[_id].target;
 
-            // transfer the funds to the receiver 
+            // transfer the funds to the receiver
             to.transfer(fund);
 
             emit projectClosed(_id, project.title);
@@ -178,7 +176,9 @@ contract CrowdFunding {
      * @dev Refunds funds to contributors for a specific project.
      * @param _id The ID of the project.
      */
-    function refundFunds(uint256 _id) public checkIfOwner checkIfOpen(_id) {
+    function refundFunds(uint256 _id) public checkIfOwner {
+        require(fundingRecords[_id].isOpen == true, "Already Funded!!");
+        
         fundingRecords[_id].isOpen = false;
         Funding storage project = fundingRecords[_id];
 
@@ -203,6 +203,13 @@ contract CrowdFunding {
      */
     function pauseFunding(uint256 _id) public checkIfOwner {
         fundingRecords[_id].isPaused = true;
+    }
+
+    /**
+     * @dev Update day count.
+     */
+    function updateCounter() public checkIfOwner {
+        dayCount++;
     }
 
     /**
