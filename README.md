@@ -160,6 +160,8 @@ npm run verify-sepolia
 |totalProjects()|	Retrieves the total number of projects.|
 |getTotalFundRaised()	|Retrieves the total amount of funding raised.|
 
+***
+
 ## 👨🏻‍💻 Contributor
 - ## [Akash Vaghela](https://akash11.com)
 
